@@ -52,7 +52,8 @@ module.exports = function (grunt) {
     // Task configuration.
     clean: {
       dist: 'dist',
-      docs: 'docs/dist'
+      docs: 'docs/dist',
+      upyun: 'upyun/dist'
     },
 
     jshint: {
@@ -118,9 +119,16 @@ module.exports = function (grunt) {
           'js/popover.js',
           'js/scrollspy.js',
           'js/tab.js',
-          'js/affix.js'
+          'js/affix.js',
+          'js/variadic-input.js'
         ],
         dest: 'dist/js/<%= pkg.name %>.js'
+      },
+      upyun: {
+        src: [
+          'js/variadic-input.js'
+        ],
+        dest: 'upyun/dist/js/<%= pkg.name %>.upyun.js'
       }
     },
 
@@ -135,6 +143,10 @@ module.exports = function (grunt) {
       core: {
         src: '<%= concat.bootstrap.dest %>',
         dest: 'dist/js/<%= pkg.name %>.min.js'
+      },
+      upyun: {
+        src: '<%= concat.upyun.dest %>',
+        dest: 'upyun/dist/js/<%= pkg.name %>.upyun.min.js'
       },
       customize: {
         src: configBridge.paths.customizerJs,
@@ -175,6 +187,17 @@ module.exports = function (grunt) {
         },
         src: 'less/theme.less',
         dest: 'dist/css/<%= pkg.name %>-theme.css'
+      },
+      compileUpyun: {
+        options: {
+          strictMath: true,
+          sourceMap: true,
+          outputSourceFiles: true,
+          sourceMapURL: '<%= pkg.name %>.upyun.css.map',
+          sourceMapFilename: 'upyun/dist/css/<%= pkg.name %>.upyun.css.map'
+        },
+        src: 'less/bootstrap.upyun.less',
+        dest: 'upyun/dist/css/<%= pkg.name %>.upyun.css'
       }
     },
 
@@ -202,6 +225,12 @@ module.exports = function (grunt) {
         cwd: 'docs/examples/',
         src: ['**/*.css'],
         dest: 'docs/examples/'
+      },
+      upyun: {
+        options: {
+          map: true
+        },
+        src: 'upyun/dist/css/<%= pkg.name %>.upyun.css'
       }
     },
 
@@ -241,6 +270,10 @@ module.exports = function (grunt) {
       minifyTheme: {
         src: 'dist/css/<%= pkg.name %>-theme.css',
         dest: 'dist/css/<%= pkg.name %>-theme.min.css'
+      },
+      minifyUpyun: {
+        src: 'upyun/dist/css/<%= pkg.name %>.upyun.css',
+        dest: 'upyun/dist/css/<%= pkg.name %>.upyun.min.css'
       },
       docs: {
         src: [
@@ -473,14 +506,19 @@ module.exports = function (grunt) {
   grunt.registerTask('test-js', ['jshint:core', 'jshint:test', 'jshint:grunt', 'jscs:core', 'jscs:test', 'jscs:grunt', 'qunit']);
 
   // JS distribution task.
-  grunt.registerTask('dist-js', ['concat', 'uglify:core', 'commonjs']);
+  grunt.registerTask('dist-js', ['concat:bootstrap', 'uglify:core', 'commonjs']);
+  grunt.registerTask('dist-upyun-js', ['concat:upyun', 'uglify:upyun']);
 
   // CSS distribution task.
   grunt.registerTask('less-compile', ['less:compileCore', 'less:compileTheme']);
   grunt.registerTask('dist-css', ['less-compile', 'autoprefixer:core', 'autoprefixer:theme', 'csscomb:dist', 'cssmin:minifyCore', 'cssmin:minifyTheme']);
+  grunt.registerTask('dist-upyun-css', ['less:compileUpyun', 'autoprefixer:upyun', 'cssmin:minifyUpyun']);
 
   // Full distribution task.
   grunt.registerTask('dist', ['clean:dist', 'dist-css', 'copy:fonts', 'dist-js']);
+
+  // Full distribution task for upyun.
+  grunt.registerTask('dist-upyun', ['clean:upyun', 'dist-upyun-css', 'dist-upyun-js']);
 
   // Default task.
   grunt.registerTask('default', ['clean:dist', 'copy:fonts', 'test']);
