@@ -1,0 +1,49 @@
+<div class="bs-docs-section">
+  <h1 id="loading" class="page-header">[UPYUN] Loading <small>loading.js</small></h1>
+  <p>Loading loading animation elegant</p>
+
+  <h2 id="loading-usage">Usage</h2>
+  <h3>Via JavaScript</h3>
+  <p>Call a loading with id <code>myBtn</code> with a single line of JavaScript:</p>
+  {% highlight js %}$('#myBtn').loading('start'){% endhighlight %}
+
+  <h3 id="loading-options">Options</h3>
+  <p>Options can be passed via JavaScript</p>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped js-options-table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>type</th>
+        <th>default</th>
+        <th>description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>duration</td>
+        <td>number</td>
+        <td>1000</td>
+        <td>Loading animation set minimum time</td>
+      </tr>
+      </tbody>
+    </table>
+  </div><!-- /.table-responsive -->
+
+  <h3 id="loading-methods">Methods</h3>
+
+  <h4><code>.loading('start')</code></h4>
+  <p>Manually start a loaing</p>
+
+  <h4><code>.loading('stop')</code></h4>
+  <p>Manually stop a loaing</p>
+
+  <h4><code>.loading(options)</code></h4>
+  <p>Activates your content as a loading. Accepts an optional options <code>object</code>.</p>
+{% highlight js %}
+$('#mySumitBtn').loading({
+  duration: 800
+})
+{% endhighlight %}
+
+</div>

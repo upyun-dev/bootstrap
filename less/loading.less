@@ -1,0 +1,51 @@
+body {
+  > .loading-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    padding: 0;
+    margin: 0;
+    z-index: 233333;
+    > .loading-box {
+      position: absolute;
+      left: 0;
+      top: -200px;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 28px;
+      height: 28px;
+    }
+    i {
+      font-size: 2em;
+    }
+  }
+}
+
+/* target loading*/
+.loading-bg {
+  float: right;
+  padding: 0 0 0 12px;
+}
+
+#loading-icon {
+  color: #fff;
+  .animation-name(loading-rotate);
+  .animation-duration(1s);
+  .animation-timing-function(ease-in-out);
+  .animation-delay(0s);
+  .animation-iteration-count(infinite);
+}
+
+@-webkit-keyframes loading-rotate {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes loading-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
