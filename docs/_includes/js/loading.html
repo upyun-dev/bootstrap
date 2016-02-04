@@ -1,14 +1,39 @@
 <div class="bs-docs-section">
   <h1 id="loading" class="page-header">[UPYUN] Loading <small>loading.js</small></h1>
-  <p>Loading loading animation elegant</p>
-
+  <p>Loading loading animation elegant.</p>
+  <h2 id="loading-examples">Examples</h2>
+  <h3>Live demo</h3>
+  <p>Toggle a loading via JavaScript by clicking the button below. It will start loading animation and stop after toggle stop methods.</p>
+  <div class="bs-example bs-example-padded-bottom">
+    <button id="loading-demo" class="btn btn-primary btn-lg">Launch demo loading</button>
+    <script>
+      document.querySelector('#loading-demo').onclick = function(){
+        var $this = $(this)
+        $this.loading('start')
+        setTimeout(function(){
+          $this.loading('stop')
+        }, 2000)
+      }
+    </script>
+  </div>
+{% highlight html %}
+<button id="loading-demo" class="btn btn-primary btn-lg">launch demo loading</button>
+<script>
+  // manual trigger start event
+  $('#loading-demo').loading('start')
+  // manual trigger stop event after two seconds
+  setTimeout(function(){
+    $('#loading-demo').loading('stop')
+  }, 2000)
+</script>
+{% endhighlight %}
   <h2 id="loading-usage">Usage</h2>
   <h3>Via JavaScript</h3>
   <p>Call a loading with id <code>myBtn</code> with a single line of JavaScript:</p>
-  {% highlight js %}$('#myBtn').loading('start'){% endhighlight %}
+  {% highlight js %}$('#myBtn').loading('start').{% endhighlight %}
 
   <h3 id="loading-options">Options</h3>
-  <p>Options can be passed via JavaScript</p>
+  <p>Options can be passed via JavaScript.</p>
   <div class="table-responsive">
     <table class="table table-bordered table-striped js-options-table">
       <thead>
@@ -24,7 +49,7 @@
         <td>duration</td>
         <td>number</td>
         <td>1000</td>
-        <td>Loading animation set minimum time</td>
+        <td>Minimum milliseconds loding animation duration.</td>
       </tr>
       </tbody>
     </table>
@@ -33,10 +58,10 @@
   <h3 id="loading-methods">Methods</h3>
 
   <h4><code>.loading('start')</code></h4>
-  <p>Manually start a loaing</p>
+  <p>Manually start a loaing.</p>
 
   <h4><code>.loading('stop')</code></h4>
-  <p>Manually stop a loaing</p>
+  <p>Manually stop a loaing.</p>
 
   <h4><code>.loading(options)</code></h4>
   <p>Activates your content as a loading. Accepts an optional options <code>object</code>.</p>
