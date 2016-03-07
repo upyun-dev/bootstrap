@@ -121,14 +121,16 @@ module.exports = function (grunt) {
           'js/tab.js',
           'js/affix.js',
           'js/variadic-input.js',
-          'js/loading.js'
+          'js/loading.js',
+          'js/async-form.js'
         ],
         dest: 'dist/js/<%= pkg.name %>.js'
       },
       upyun: {
         src: [
           'js/variadic-input.js',
-          'js/loading.js'
+          'js/loading.js',
+          'js/async-form.js'
         ],
         dest: 'upyun/dist/js/<%= pkg.name %>.upyun.js'
       }

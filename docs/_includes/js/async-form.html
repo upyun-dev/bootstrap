@@ -1,0 +1,67 @@
+<div class="bs-docs-section">
+  <h1 id="async-form" class="page-header">[UPYUN] Async Form <small>async-form.js</small></h1>
+  <p>Submit form asynchronous.</p>
+  <h2 id="async-form-examples">Examples</h2>
+  <h3>Static example</h3>
+  <p>Set <code>data-async</code> on a controller <code>form</code>.</p>
+{% highlight html %}
+<form data-async method="POST" action="/upload">
+  <input type="text" name="user-name" />
+  <input type="password" name="password" />
+  <input type="submit" value="Log in" />
+</form>
+{% endhighlight %}
+
+  <h2 id="async-form-usage">Usage</h2>
+  <h3>Via data attributes</h3>
+  <p>Activate a async form without writing JavaScript. Set <code>data-async</code> on a controller <code>form</code>.</p>
+{% highlight html %}
+<form data-async method="POST" action="/someAction">
+  <!-- some inputs -->
+</form>
+{% endhighlight %}
+  <h3>Via JavaScript</h3>
+  <p>Call a async-form with id <code>myForm</code> with a single line of JavaScript:</p>
+{% highlight js %}$('#myForm').asyncForm(){% endhighlight %}
+
+  <h3 id="async-form-events">Events</h3>
+  <p>Async form is in the process of implementation, triggering different events.</p>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped bs-events-table">
+      <thead>
+      <tr>
+        <th>Event Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>beforeSubmit.bs.asyncForm</td>
+        <td>Before the request sent, it be triggered, and you can listen to this event then handle some logics, such as start loading animation.</td>
+      </tr>
+      <tr>
+        <td>success.bs.asyncForm </td>
+        <td>It be triggered when the request succeeded, the listener function gets passed two arguments: the event object and the data return from server.</td>
+      </tr>
+      <tr>
+        <td>error.bs.asyncForm</td>
+        <td>It be triggered when the request failed, the usage exactly same as jQuery Ajax error callback function, click
+          <a href="http://api.jquery.com/jQuery.ajax/">here</a> for more infos. </td>
+      </tr>
+      </tbody>
+    </table>
+  </div><!-- /.table-responsive -->
+{% highlight js %}
+$('form[data-async]').on('beforeSubmit.bs.asyncForm', function (e) {
+  // do something...
+});
+
+$('form[data-async]').on('success.bs.asyncForm', function (e, data) {
+  // do something...
+});
+
+$('form[data-async]').on('error.bs.asyncForm', function (e, jqXHR, testStatus, errorThrown) {
+  // do something...
+});
+{% endhighlight %}
+</div>
