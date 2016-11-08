@@ -2556,9 +2556,14 @@ if (typeof jQuery === 'undefined') {
   var AsyncForm = function (element, options) {
     this.$element = $(element)
     this.options = options
+    this.$submit = null
     this.$element.on('submit', $.proxy(function (e) {
       e.preventDefault()
       return this.send()
+    }, this))
+
+    $(':submit', this.$element).click($.proxy(function(e){
+      this.$submit = $(e.target)
     }, this))
   }
 
@@ -2578,10 +2583,14 @@ if (typeof jQuery === 'undefined') {
     if (enctype && ~enctype.indexOf('form-data')) {
       // 'data-form' include in enctype
       data = new FormData(this.$element[0])
+      if (this.$submit) data.append(this.$submit.attr('name'), this.$submit.val())
       contentType = false
     } else {
-      data = this.$element.serialize()
+      data = this.$element.serializeArray()
+      if (this.$submit) data.push({ name: this.$submit.attr('name'), value: this.$submit.val() })
+      data = $.param(data);
     }
+    this.$submit = null;
 
     this.$element.trigger(e = $.Event('beforeSubmit.bs.asyncForm'))
     $.ajax(url, {
